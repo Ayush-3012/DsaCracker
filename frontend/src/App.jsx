@@ -1,16 +1,26 @@
 import { Routes, Route } from "react-router-dom";
-// import About from "./components/About";
-import Home from "./components/home";
+import Home from "./components/Home";
+import About from "./components/About";
 import Sheet from "./components/Sheet";
+import Footer from "./components/partials/Footer";
+import Header from "./components/partials/Header";
+import TopicContextProvider from "./topic-context/TopicContextProvider";
+import QuestionContextProvider from "./question-context/QuestionContextProvider";
 
-function App() {
+const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<Home />} />
-      <Route path="/:dsName" element={<Sheet />} />
-    </Routes>
+    <TopicContextProvider>
+      <QuestionContextProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path={`/:dsName`} element={<Sheet />} />
+        </Routes>
+        <Footer />
+      </QuestionContextProvider>
+    </TopicContextProvider>
   );
-}
+};
 
 export default App;
