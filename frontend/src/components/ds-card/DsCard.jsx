@@ -3,7 +3,7 @@ import { useContext } from "react";
 import DsSingleCard from "./DsSingleCard";
 import TopicContext from "../../topic-context/TopicContext";
 
-const ShowCard = () => {
+const DsCard = () => {
   const { topics } = useContext(TopicContext);
 
   return (
@@ -15,4 +15,4 @@ const ShowCard = () => {
   );
 };
 
-export default ShowCard;
+export default DsCard;

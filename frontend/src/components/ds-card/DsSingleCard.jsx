@@ -1,22 +1,19 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import _ from "lodash";
-import QuestionContext from "../../question-context/QuestionContext";
-import { useContext } from "react";
+import { motion } from "framer-motion";
 
-/* eslint-disable react/prop-types */
 const DsSingleCard = ({ item }) => {
   const dsName = _.lowerCase(item.topicName);
-  const { setQuestions, setDescription } = useContext(QuestionContext);
   const percentQuesDone = (item.doneQuestions * 100) / item.questions.length;
 
-  const handleClick = () => {
-    setQuestions(item.questions);
-    setDescription(item.description);
-  };
-
   return (
-    <>
-      <Link to={`/${dsName}`} onClick={handleClick}>
+    <motion.div
+      initial={{ y: -1100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8, type: "spring", bounce: 0.5}}
+    >
+      <Link to={`/${dsName}`}>
         <div className="relative bg-zinc-600 group text-slate-50 font-serif rounded-ee-xl rounded-ss-xl hover:shadow-[1px_1px_20px_rgb(0,255,245)] hover:-translate-y-2 transition ease-in-out duration-300">
           <div className="p-4">
             <img
@@ -46,10 +43,15 @@ const DsSingleCard = ({ item }) => {
                 {percentQuesDone ? (
                   <div>
                     <p className="">Done: {item.doneQuestions}</p>
-                    <div className="">
-                      <progress className="progress-bar" value="0"></progress>
-                      <div className="">
-                        <span className=""></span>
+                    <div className="pgr">
+                      <div className="progress-bar" value="0"></div>
+                      <div
+                        className="inner-progress"
+                        style={{ "--percentQuesDone": `${percentQuesDone}%` }}
+                      >
+                        <span className="percentValue">
+                          {Math.trunc(percentQuesDone)}%
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -61,7 +63,7 @@ const DsSingleCard = ({ item }) => {
           </div>
         </div>
       </Link>
-    </>
+    </motion.div>
   );
 };
 
