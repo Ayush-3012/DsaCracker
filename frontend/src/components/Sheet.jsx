@@ -50,7 +50,7 @@ const Sheet = () => {
         </h1>
         <span className="text-2xl font-mono mb-2 font-semibold text-slate-300 max-sm:text-xl">
           <MotionLink
-            to="/"
+            to="/home"
             className="italic hover:underline hover:not-italic"
             whileHover={{ color: "#fff" }}
           >

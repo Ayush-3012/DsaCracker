@@ -1,8 +1,9 @@
 import express from "express";
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import completedQuestionsRouter from "./routes/completedQuestions.js";
+import usersRouter from "./routes/registeredUsers.js";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 mongoose.connect(uri);
 
 app.use("/completedQuestions", completedQuestionsRouter);
+app.use("/registeredUsers", usersRouter);
 
 app.listen(port, () => {
   console.log(`Server is listening to port ${port}`);
