@@ -7,34 +7,44 @@ import { motion } from "framer-motion";
 import _ from "lodash";
 import axios from "axios";
 import AppContext from "../app-context/AppContext";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 const Sheet = () => {
   const { dsName } = useParams();
   const { setQuestions, setDescription, description, setCompletedQuestions } =
     useContext(QuestionContext);
-
   const [data, setData] = useState(false);
-  const { user } = useContext(AppContext);
+  const { user, isLoggedIn } = useContext(AppContext);
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    axios
-      .get(
-        `${import.meta.env.VITE_API_ROUTES}/questions/getQuestions?user=${user}`
-      )
-      .then((res) => {
-        setCompletedQuestions(res.data.completedQuestions);
-        const matchingItem = res.data.questions.find(
-          (item) => _.lowerCase(item.topicName) === dsName
-        );
+    isLoggedIn
+      ? axios
+          .get(
+            `${
+              import.meta.env.VITE_API_ROUTES
+            }/questions/getQuestions?user=${user}`
+          )
+          .then((res) => {
+            setCompletedQuestions(res.data.completedQuestions);
+            const matchingItem = res.data.questions.find(
+              (item) => _.lowerCase(item.topicName) === dsName
+            );
 
-        if (matchingItem) {
-          setData(true);
-          setQuestions(matchingItem.questions);
-          setDescription(matchingItem.description);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, [dsName, setCompletedQuestions, setDescription, setQuestions, user]);
+            if (matchingItem) {
+              setData(true);
+              setQuestions(matchingItem.questions);
+              setDescription(matchingItem.description);
+            }
+          })
+          .catch((err) => console.log(err))
+      : (enqueueSnackbar("User is Not LoggedIn, Please LogIn", {
+          variant: "info",
+        }),
+        navigate("/"));
+  }, [dsName, enqueueSnackbar, isLoggedIn, navigate, setCompletedQuestions, setDescription, setQuestions, user]);
 
   const MotionLink = motion(Link);
 

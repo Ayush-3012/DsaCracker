@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SignUp from "./auth/SignUp";
 import LogIn from "./auth/LogIn";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { RiLoginCircleLine } from "react-icons/ri";
+import AppContext from "../app-context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
+  const { isLoggedIn } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/home");
+    }
+  }, [isLoggedIn, navigate]);
 
   const handleSignUpClick = () => {
     setShowSignUp(true);

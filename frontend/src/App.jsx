@@ -8,6 +8,7 @@ import QuestionContextProvider from "./question-context/QuestionContextProvider"
 import AppContextProvider from "./app-context/AppContextProvider";
 import Index from "./components/Index";
 import Account from "./components/Account";
+import NotFound from "./components/partials/NotFound";
 
 const App = () => {
   return (
@@ -19,8 +20,9 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path={`/:dsName`} element={<Sheet />} />
+            <Route path={`/ds:dsName`} element={<Sheet />} />
             <Route path="account" element={<Account />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </QuestionContextProvider>
       </TopicContextProvider>

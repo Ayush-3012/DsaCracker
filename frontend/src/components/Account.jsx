@@ -3,29 +3,40 @@ import { useContext, useEffect, useState } from "react";
 import AppContext from "../app-context/AppContext";
 import axios from "axios";
 import QuestionContext from "../question-context/QuestionContext";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 const Account = () => {
-  const { user } = useContext(AppContext);
+  const { user, isLoggedIn } = useContext(AppContext);
   const [aboutUser, setAboutUser] = useState({});
   const [data, setData] = useState(false);
   const { completedQuestions, setCompletedQuestions } =
     useContext(QuestionContext);
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_ROUTES}/users/account?user=${user}`)
-      .then((res) => {
-        setData(true), setAboutUser(res.data.foundUser);
-        axios
-          .get(
-            `${
-              import.meta.env.VITE_API_ROUTES
-            }/questions/getQuestions?user=${user}`
-          )
-          .then((res) => setCompletedQuestions(res.data.completedQuestions));
-      })
-      .catch((err) => console.log(err));
-  }, [setCompletedQuestions, user ]);
+    isLoggedIn
+      ? axios
+          .get(`${import.meta.env.VITE_API_ROUTES}/users/account?user=${user}`)
+          .then((res) => {
+            setData(true), setAboutUser(res.data.foundUser);
+            axios
+              .get(
+                `${
+                  import.meta.env.VITE_API_ROUTES
+                }/questions/getQuestions?user=${user}`
+              )
+              .then((res) =>
+                setCompletedQuestions(res.data.completedQuestions)
+              );
+          })
+          .catch((err) => console.log(err))
+      : (enqueueSnackbar("User is Not LoggedIn, Please LogIn", {
+          variant: "info",
+        }),
+        navigate("/"));
+  }, [enqueueSnackbar, isLoggedIn, navigate, setCompletedQuestions, user]);
 
   return (
     <>
