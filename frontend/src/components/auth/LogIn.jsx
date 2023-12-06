@@ -19,7 +19,6 @@ const LogIn = () => {
 
   const handleLogIn = (e) => {
     e.preventDefault();
-    console.log(import.meta.env.VITE_API_ROUTES)
     axios
       .get(`${import.meta.env.VITE_API_ROUTES}/users/getUser?email=${email}`)
       .then(async (res) => {
