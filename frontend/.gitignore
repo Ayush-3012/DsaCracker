@@ -25,7 +25,6 @@ dist-ssr
 *.sw?
 
 .eslintrc.cjs
-postcss.config.js
 vercel.json
 
 .env
