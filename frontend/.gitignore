@@ -27,7 +27,6 @@ dist-ssr
 .eslintrc.cjs
 postcss.config.js
 tailwind.config.js
-vite.config.js
 vercel.json
 
 .env
