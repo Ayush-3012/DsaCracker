@@ -20,7 +20,7 @@ const Index = () => {
 
   return (
     <>
-      <div className="flex gap-2 my-1 py-8 bg-slate-800 mx-4 rounded-xl max-md:mx-1 max-lg:py-6 max-md:py-3 max-sm:py-1">
+      <div className="flex gap-2 my-1 py-8 bg-slate-800 mx-4  rounded-xl max-md:mx-1 max-lg:py-6 max-md:py-3 max-sm:py-1">
         <div className="mx-5 flex-1 flex justify-center max-md:mx-0">
           <div
             className={`bg-blue-200 ${

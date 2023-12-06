@@ -4,16 +4,20 @@ import { FaRegUser } from "react-icons/fa";
 import { useContext } from "react";
 import AppContext from "../../app-context/AppContext.js";
 import { RiLogoutCircleLine } from "react-icons/ri";
-// import { IoPersonAddOutline } from "react-icons/io5";
-// import { RiLoginCircleLine } from "react-icons/ri";
 
 const Header = () => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
+  const {
+    isLoggedIn,
+    setIsLoggedIn,
+    isAuthenticated,
+    setIsAuthenticated,
+    setUser,
+  } = useContext(AppContext);
 
   return (
     <div className="flex bg-slate-800 items-center justify-center m-1 rounded-xl text-5xl py-2 sticky top-0 max-md:text-4xl max-sm:text-3xl max-md:m-0 max-md:rounded-none">
       <div className="flex justify-center items-center gap-5 max-md:gap-4 max-sm:gap-3">
-        {isLoggedIn ? (
+        {isLoggedIn && isAuthenticated ? (
           <>
             <Link to="/home">
               <PiHouseBold className=" text-emerald-400 hover:text-white hover:scale-110 transition duration-200 ease-in-out cursor-pointer" />
@@ -21,8 +25,8 @@ const Header = () => {
             <Link to="/about">
               <PiInfoBold className=" text-emerald-400 hover:text-white hover:scale-110 transition duration-200 ease-in-out cursor-pointer" />
             </Link>
-            <Link to="/my_account">
-              <FaRegUser className=" text-emerald-400 hover:text-white hover:scale-110 transition duration-200 ease-in-out cursor-pointer" />
+            <Link to="/account">
+              <FaRegUser className="text-4xl text-emerald-400 hover:text-white hover:scale-110 transition duration-200 ease-in-out cursor-pointer max-md:text-3xl max-sm:text-2xl" />
             </Link>
             <Link
               to="https://docs.google.com/spreadsheets/d/1FMdN_OCfOI0iAeDlqswCiC2DZzD4nPsb/edit#gid=1773184282"
@@ -30,7 +34,14 @@ const Header = () => {
             >
               <PiMapPinBold className=" text-emerald-400 hover:text-white hover:scale-110 transition duration-200 ease-in-out cursor-pointer" />
             </Link>
-            <Link to="/" onClick={() => setIsLoggedIn(false)}>
+            <Link
+              to="/"
+              onClick={() => {
+                setIsLoggedIn(false);
+                setIsAuthenticated(false);
+                setUser(null);
+              }}
+            >
               <RiLogoutCircleLine className=" text-emerald-400 hover:text-white hover:scale-110 transition duration-200 ease-in-out cursor-pointer" />
             </Link>
           </>

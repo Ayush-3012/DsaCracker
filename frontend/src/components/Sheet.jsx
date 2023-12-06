@@ -6,19 +6,24 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import _ from "lodash";
 import axios from "axios";
+import AppContext from "../app-context/AppContext";
 
 const Sheet = () => {
   const { dsName } = useParams();
-  const { setQuestions, setDescription, description } =
+  const { setQuestions, setDescription, description, setCompletedQuestions } =
     useContext(QuestionContext);
 
   const [data, setData] = useState(false);
+  const { user } = useContext(AppContext);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/completedQuestions/")
+      .get(
+        `${import.meta.env.VITE_API_ROUTES}/questions/getQuestions?user=${user}`
+      )
       .then((res) => {
-        const matchingItem = res.data.find(
+        setCompletedQuestions(res.data.completedQuestions);
+        const matchingItem = res.data.questions.find(
           (item) => _.lowerCase(item.topicName) === dsName
         );
 
@@ -29,7 +34,7 @@ const Sheet = () => {
         }
       })
       .catch((err) => console.log(err));
-  }, [dsName, setDescription, setQuestions]);
+  }, [dsName, setCompletedQuestions, setDescription, setQuestions, user]);
 
   const MotionLink = motion(Link);
 

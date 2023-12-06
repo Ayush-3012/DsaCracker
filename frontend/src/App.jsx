@@ -5,10 +5,9 @@ import Sheet from "./components/Sheet";
 import Header from "./components/partials/Header";
 import TopicContextProvider from "./topic-context/TopicContextProvider";
 import QuestionContextProvider from "./question-context/QuestionContextProvider";
-// import SignUp from "./components/auth/SignUp";
 import AppContextProvider from "./app-context/AppContextProvider";
-// import LogIn from "./components/auth/LogIn";
 import Index from "./components/Index";
+import Account from "./components/Account";
 
 const App = () => {
   return (
@@ -21,8 +20,7 @@ const App = () => {
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path={`/:dsName`} element={<Sheet />} />
-            {/* <Route path="/login" element={<LogIn />} />
-            <Route path="/signup" element={<SignUp />} /> */}
+            <Route path="account" element={<Account />} />
           </Routes>
         </QuestionContextProvider>
       </TopicContextProvider>

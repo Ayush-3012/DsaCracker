@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { SiCodingninjas, SiGeeksforgeeks, SiLeetcode } from "react-icons/si";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useSnackbar } from "notistack";
+import AppContext from "../../app-context/AppContext";
 
 const QuestionItems = ({ item }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -24,6 +25,7 @@ const QuestionItems = ({ item }) => {
   };
 
   const [checked, setChecked] = useState(item.Done);
+  const {user} = useContext(AppContext)
 
   const handleClick = () => {
     const completedQuestion = {
@@ -35,11 +37,23 @@ const QuestionItems = ({ item }) => {
     };
 
     axios
-      .post("http://localhost:5000/completedQuestions/add", completedQuestion)
+      .post(
+        `${import.meta.env.VITE_API_ROUTES}/questions/addQuestions`,
+        completedQuestion
+      )
       .then((res) => {
-        setChecked(!checked);
-        const { message } = res.data;
-        enqueueSnackbar(message, { variant: "success" });
+        const { topicId, questionId } = res.data;
+        axios
+          .patch(`${import.meta.env.VITE_API_ROUTES}/users/updateSolved?user=${user}`, {
+            topicId,
+            questionId,
+          })
+          .then((res) => {
+            setChecked(!checked);
+            const { message } = res.data;
+            enqueueSnackbar(message, { variant: "success" });
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => {
         enqueueSnackbar("Error", { variant: "error" });

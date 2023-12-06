@@ -4,20 +4,45 @@ import DsCard from "../components/ds-card/DsCard";
 import axios from "axios";
 import TopicContext from "../topic-context/TopicContext.js";
 import { motion } from "framer-motion";
+import AppContext from "../app-context/AppContext.js";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
+import QuestionContext from "../question-context/QuestionContext.js";
 
 const Home = () => {
   const [data, setData] = useState(false);
   const { setTopics } = useContext(TopicContext);
+  const { setCompletedQuestions } = useContext(QuestionContext);
+  const { user, isAuthenticated } = useContext(AppContext);
+  const navigator = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/completedQuestions/")
-      .then((res) => {
-        setData(true);
-        setTopics(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, [setTopics]);
+    isAuthenticated
+      ? axios
+          .get(
+            `${
+              import.meta.env.VITE_API_ROUTES
+            }/questions/getQuestions?user=${user}`
+          )
+          .then((res) => {
+            setData(true);
+            setTopics(res.data.questions);
+            setCompletedQuestions(res.data.completedQuestions);
+          })
+          .catch((err) => console.log(err))
+      : (enqueueSnackbar("User is Not LoggedIn, Please LogIn", {
+          variant: "info",
+        }),
+        navigator("/"));
+  }, [
+    enqueueSnackbar,
+    isAuthenticated,
+    navigator,
+    setTopics,
+    setCompletedQuestions,
+    user,
+  ]);
 
   return (
     <motion.div
@@ -30,7 +55,7 @@ const Home = () => {
         className="border-2 rounded-xl border-black bg-zinc-900"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.4}}
+        transition={{ duration: 0.4 }}
       >
         <div className="text-7xl text-slate-200 font-extrabold font-mono text-center max-md:text-5xl max-sm:text-3xl">
           DSA Cracker

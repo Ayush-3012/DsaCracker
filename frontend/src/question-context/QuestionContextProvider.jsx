@@ -5,10 +5,18 @@ import QuestionContext from "./QuestionContext";
 const QuestionContextProvider = ({ children }) => {
   const [questions, setQuestions] = useState([]);
   const [description, setDescription] = useState("");
+  const [completedQuestions, setCompletedQuestions] = useState([]);
 
   return (
     <QuestionContext.Provider
-      value={{ questions, setQuestions, description, setDescription }}
+      value={{
+        questions,
+        completedQuestions,
+        description,
+        setCompletedQuestions,
+        setQuestions,
+        setDescription,
+      }}
     >
       {children}
     </QuestionContext.Provider>

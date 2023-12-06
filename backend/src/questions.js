@@ -27,7 +27,7 @@ export default [
       },
       {
         Topic: "Array",
-        Problem: 'Find the "Kth" max and min element of an array ',
+        Problem: "Find the 'Kth' max and min element of an array",
         Done: false,
         Bookmark: false,
         Notes: "",
@@ -46,7 +46,7 @@ export default [
       },
       {
         Topic: "Array",
-        Problem: "Move all the negative elements to one side of the array ",
+        Problem: "Move all the negative elements to one side of the array",
         Done: false,
         Bookmark: false,
         Notes: "",
@@ -210,7 +210,7 @@ export default [
       },
       {
         Topic: "Array",
-        Problem: "find maximum product subarray ",
+        Problem: "Find maximum product subarray",
         Done: false,
         Bookmark: false,
         Notes: "",
@@ -229,7 +229,7 @@ export default [
       {
         Topic: "Array",
         Problem:
-          'Given an array of size n and a number k, find all elements that appear more than " n/k " times.',
+          "Given an array of size n and a number k, find all elements that appear more than ' n/k ' times.",
         Done: false,
         Bookmark: false,
         Notes: "",
@@ -1235,7 +1235,7 @@ export default [
       },
       {
         Topic: "Linked List",
-        Problem: "Find the starting point of the loop. ",
+        Problem: "Find the starting point of the loop.",
         Done: false,
         Bookmark: false,
         Notes: "",
@@ -1807,7 +1807,7 @@ export default [
       },
       {
         Topic: "Binary Trees",
-        Problem: 'Print all "K" Sum paths in a Binary tree',
+        Problem: "Print all 'K' Sum paths in a Binary tree",
         Done: false,
         Bookmark: false,
         Notes: "",
@@ -1988,7 +1988,7 @@ export default [
       },
       {
         Topic: "BST",
-        Problem: 'Count pairs from 2 BST whose sum is equal to given value "X"',
+        Problem: "Count pairs from 2 BST whose sum is equal to given value 'X'",
         Done: false,
         Bookmark: false,
         Notes: "",
@@ -2025,7 +2025,7 @@ export default [
       },
       {
         Topic: "BST",
-        Problem: 'Given "n" appointments, find the conflicting appointments',
+        Problem: "Given 'n' appointments, find the conflicting appointments",
         Done: false,
         Bookmark: false,
         Notes: "",
@@ -2628,7 +2628,7 @@ export default [
       },
       {
         Topic: "Stacks & Queues",
-        Problem: 'Implement "N" stacks in an Array',
+        Problem: "Implement 'N' stacks in an Array",
         Done: false,
         Bookmark: false,
         Notes: "",
@@ -2803,7 +2803,7 @@ export default [
       },
       {
         Topic: "Stacks & Queues",
-        Problem: 'Implement "n" queue in an array',
+        Problem: "Implement 'n' queue in an array",
         Done: false,
         Bookmark: false,
         Notes: "",

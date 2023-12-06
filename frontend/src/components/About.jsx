@@ -28,12 +28,7 @@ const About = () => {
             <MotionLink
               to="/"
               target="_blank"
-              className="italic text-slate-400"
-              whileHover={{
-                fontStyle: "normal",
-                color: "#f1f5f9",
-                textDecoration: "underline",
-              }}
+              className="italic text-slate-400 hover:underline hover:text-white hover:not-italic"
             >
               Dsa Cracker
             </MotionLink>{" "}
@@ -41,12 +36,7 @@ const About = () => {
             <MotionLink
               to="https://docs.google.com/spreadsheets/d/1FMdN_OCfOI0iAeDlqswCiC2DZzD4nPsb/edit#gid=1773184282"
               target="_blank"
-              className="italic text-slate-400"
-              whileHover={{
-                fontStyle: "normal",
-                color: "#f1f5f9",
-                textDecoration: "underline",
-              }}
+              className="italic text-slate-400 hover:underline hover:text-white hover:not-italic"
             >
               {" "}
               DSA Cracker Sheet{" "}
@@ -55,12 +45,7 @@ const About = () => {
             <MotionLink
               to="https://www.linkedin.com/in/love-babbar-38ab2887/"
               target="_blank"
-              className="italic text-slate-400"
-              whileHover={{
-                fontStyle: "normal",
-                color: "#f1f5f9",
-                textDecoration: "underline",
-              }}
+              className="italic text-slate-400 hover:underline hover:text-white hover:not-italic"
             >
               <span> Love Babbar</span>
             </MotionLink>
@@ -74,35 +59,24 @@ const About = () => {
         >
           <h6 className="text-3xl p-1">
             DSA CRACKER project by
-            <MotionLink
+            <Link
               to="https://www.linkedin.com/in/ayush-kumar-6137651b4/"
               target="_blank"
-              className="italic text-slate-50"
-              whileHover={{
-                fontStyle: "normal",
-                color: "#fff",
-                textDecoration: "underline",
-              }}
+              className="italic text-slate-50 hover:underline hover:text-white hover:not-italic"
             >
-              {" "}
               Ayush Kumar
-            </MotionLink>
+            </Link>
           </h6>
           <p className="text-2xl mt-4 flex flex-col justify-center items-center">
             Learning to Code 👨‍💻 <br />
             For the 🧡 to code ✌🏻
-            <MotionLink
-              className="italic text-slate-50 self-end"
+            <Link
+              className="italic text-slate-50 self-end hover:underline hover:text-white hover:not-italic"
               to="https://github.com/Ayush-3012/DsaCracker"
               target="_blank"
-              whileHover={{
-                fontStyle: "normal",
-                color: "#fff",
-                textDecoration: "underline",
-              }}
             >
               This project 🧑‍💻
-            </MotionLink>
+            </Link>
           </p>
         </motion.div>
       </div>
