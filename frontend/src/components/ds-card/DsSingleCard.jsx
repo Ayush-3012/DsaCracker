@@ -11,13 +11,13 @@ const DsSingleCard = ({ item }) => {
     <motion.div
       initial={{ y: -1100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.8, type: "spring", bounce: 0.5}}
+      transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
     >
       <Link to={`/ds/${dsName}`}>
         <div className="relative bg-zinc-600 group text-slate-50 font-serif rounded-ee-xl rounded-ss-xl hover:shadow-[1px_1px_20px_rgb(0,255,245)] hover:-translate-y-2 transition ease-in-out duration-300">
           <div className="p-4">
             <img
-              src={`../../../assets/images/${_.lowerCase(item.topicName)}.png`}
+              src={`/assets/images/${_.lowerCase(item.topicName)}.png`}
               alt={`${item.topicName}`}
               className="rounded-ss-xl grayscale group-hover:shadow-[1px_1px_10px_rgb(256,256,256)] group-hover:scale-105 group-hover:grayscale-0 duration-300 transition ease-in-out"
             />
