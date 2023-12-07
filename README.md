@@ -17,7 +17,9 @@ The project is about tracking your problem-solving skills by solving selected qu
 
 - [@Ayush Kumar](https://github.com/Ayush-3012)
 
+## demo
 
+https://github.com/Ayush-3012/DsaCracker/assets/100586445/079ad0c6-256f-4d29-ba68-32678c9485df
 
 ## 🚀 About Me
 I'm a MERN Stack developer and a recent B.Sc. (Hons.) Computer Science graduate from Dyal Singh College, Delhi University, 
