@@ -1,0 +1,22 @@
+[
+  {
+    "fullname": "User",
+    "username": "User",
+    "password": "12345"
+  },
+  {
+    "fullname": "Admin",
+    "username": "Admin",
+    "password": "adm123"
+  },
+  {
+    "fullname": "Chintu",
+    "username": "chintu23",
+    "password": "123/*-"
+  },
+  {
+    "fullname": "Ayush Kumar",
+    "username": "ayush3012",
+    "password": "ABC3012"
+  }
+]

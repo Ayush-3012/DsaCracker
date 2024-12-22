@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "1e4ee4c3-4edd-4f38-847a-3bdd17f067ff",
+    "userName": "chintu23",
+    "imageUrl": "https://picsum.photos/id/234//300",
+    "likeCount": 4,
+    "caption": "No Caption 🔥",
+    "comments": [
+      {
+        "username": "chintu23",
+        "text": "Lit 🔥"
+      },
+      {
+        "username": "Admin",
+        "text": "Nice ❣️"
+      },
+      {
+        "username": "ayush3012",
+        "text": "Great"
+      }
+    ]
+  },
+  {
+    "_id": "9060bf79-762a-473b-872e-6c8e81c9e4ca",
+    "userName": "Admin",
+    "imageUrl": "https://picsum.photos/id/29//300",
+    "likeCount": 4,
+    "caption": "What a scene",
+    "comments": [
+      {
+        "username": "ayush3012",
+        "text": "Wow"
+      }
+    ]
+  },
+  {
+    "_id": "a2906e53-ba20-4994-9592-d7103468e711",
+    "userName": "Admin",
+    "imageUrl": "https://picsum.photos/id/98//300",
+    "likeCount": 1,
+    "caption": "Random Clicks 📸📸",
+    "comments": []
+  },
+  {
+    "_id": "eb38c906-2045-4fa2-b8da-005fe8e90030",
+    "userName": "chintu23",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQkICMR10B7H6d2On6Ytm-Mz0W4CPN-VLDT50XuGmp&s",
+    "likeCount": 0,
+    "caption": "Happy Diwali 🪔🎉",
+    "comments": []
+  }
+]
