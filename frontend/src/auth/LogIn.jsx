@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import AppContext from "../../app-context/AppContext.js";
+import AppContext from "../../context/AppContext.js";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -20,19 +20,21 @@ const LogIn = () => {
   const handleLogIn = (e) => {
     e.preventDefault();
     axios
-      .get(`${import.meta.env.VITE_API_ROUTES}/users/getUser?email=${email}`)
+      .post(
+        `${import.meta.env.VITE_API_ROUTES}/v1/users/login`,
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      )
+
       .then(async (res) => {
         if (res.data) {
-          if (await bcryptjs.compare(password, res.data.password)) {
-            setIsAuthenticated(true);
-            setIsLoggedIn(true);
-            setUser(email);
-            navigate("/home");
-          } else {
-            enqueueSnackbar("Either Email or Password is Incorrect", {
-              variant: "info",
-            });
-          }
+          setIsAuthenticated(true);
+          setIsLoggedIn(true);
+          setUser(email);
+          navigate("/home");
         } else {
           enqueueSnackbar("Either Email or Password is Incorrect", {
             variant: "info",

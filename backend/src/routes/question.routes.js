@@ -2,11 +2,14 @@ import { Router } from "express";
 import {
   addQuestions,
   getQuestions,
-} from "../controllers/question.controller.js";
+  updateSolved,
+} from "../controllers/question2.controller.js";
+import { verifyToken } from "../utils/token-manager.js";
 
-const router = Router();
+const questionRouter = Router();
 
-router.route("/getQuestions").get(getQuestions);
-router.route("/addQuestions").post(addQuestions);
+questionRouter.route("/getQuestions").get(verifyToken, getQuestions);
+questionRouter.route("/addQuestions").post(verifyToken, addQuestions);
+questionRouter.route("/addQuestions").post(verifyToken, updateSolved);
 
-export default router;
+export default questionRouter;

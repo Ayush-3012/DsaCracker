@@ -36,10 +36,13 @@ const Header = () => {
             </Link>
             <Link
               to="/"
-              onClick={() => {
+              onClick={async () => {
                 setIsLoggedIn(false);
                 setIsAuthenticated(false);
                 setUser(null);
+                await axios.post(
+                  `${import.meta.env.VITE_API_ROUTES}/users/logout`
+                );
               }}
             >
               <RiLogoutCircleLine className=" text-emerald-400 hover:text-white hover:scale-110 transition duration-200 ease-in-out cursor-pointer" />

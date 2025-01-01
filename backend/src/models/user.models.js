@@ -32,6 +32,7 @@ const userSchema = new mongoose.Schema(
             ref: "Question",
           },
         ],
+        _id: false,
       },
     ],
   },
