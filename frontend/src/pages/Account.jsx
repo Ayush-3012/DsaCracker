@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
-import AppContext from "../app-context/AppContext";
+import AppContext from "../context/AppContextProvider";
 import axios from "axios";
 import QuestionContext from "../question-context/QuestionContext";
 import { useNavigate } from "react-router-dom";

@@ -1,49 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useContext, useEffect, useState } from "react";
-import DsCard from "../components/ds-card/DsCard";
-import axios from "axios";
-import TopicContext from "../topic-context/TopicContext.js";
 import { motion } from "framer-motion";
-import AppContext from "../app-context/AppContext.js";
-import { useNavigate } from "react-router-dom";
-import { useSnackbar } from "notistack";
-import QuestionContext from "../question-context/QuestionContext.js";
+import SheetCard from "../components/SheetCard";
 
 const Home = () => {
-  const [data, setData] = useState(false);
-  const { setTopics } = useContext(TopicContext);
-  const { setCompletedQuestions } = useContext(QuestionContext);
-  const { user, isAuthenticated } = useContext(AppContext);
-  const navigator = useNavigate();
-  const { enqueueSnackbar } = useSnackbar();
-
-  useEffect(() => {
-    isAuthenticated
-      ? axios
-          .get(
-            `${
-              import.meta.env.VITE_API_ROUTES
-            }/questions/getQuestions?user=${user}`
-          )
-          .then((res) => {
-            setData(true);
-            setTopics(res.data.questions);
-            setCompletedQuestions(res.data.completedQuestions);
-          })
-          .catch((err) => console.log(err))
-      : (enqueueSnackbar("User is Not LoggedIn, Please LogIn", {
-          variant: "info",
-        }),
-        navigator("/"));
-  }, [
-    enqueueSnackbar,
-    isAuthenticated,
-    navigator,
-    setTopics,
-    setCompletedQuestions,
-    user,
-  ]);
-
   return (
     <motion.div
       className="mx-4 my-1 max-md:mx-1 flex flex-col gap-1 h-full"
@@ -64,8 +23,9 @@ const Home = () => {
           Your Gateway to crack DSA 🔥
         </div>
       </motion.div>
-      <div className="bg-zinc-800 mx-2 rounded-xl flex flex-col items-center justify-center h-[73%] ">
-        {data && <DsCard />}
+      <div className="bg-zinc-900 mx-2 rounded-xl flex flex-col items-center justify-center h-[73%] ">
+        {/* {data && <DsCard />} */}
+        <SheetCard />
       </div>
     </motion.div>
   );

@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import AppContext from "./AppContext";
-import { useEffect, useState } from "react";
 import { createContext, useContext } from "react";
+import { useTopics } from "../hooks/useTopics";
+import { useQuestions } from "../hooks/useQuestions";
+import { useAuth } from "../hooks/useAuth";
 
 const AppContext = createContext();
 
@@ -11,28 +12,9 @@ export const AppContextProvider = ({ children }) => {
   const questions = useQuestions();
 
   const contextValue = { auth, topics, questions };
-  // const [isLoggedIn, setIsLoggedIn] = useState(
-  //   sessionStorage.getItem("isLoggedIn") === "true"
-  // );
-  // const [user, setUser] = useState(sessionStorage.getItem("user") || null);
-  // const [isAuthenticated, setIsAuthenticated] = useState(
-  //   sessionStorage.getItem("isAuthenticated") === "true"
-  // );
-
-  // useEffect(() => {
-  //   sessionStorage.setItem("isLoggedIn", isLoggedIn);
-  //   sessionStorage.setItem("user", user);
-  //   sessionStorage.setItem("isAuthenticated", isAuthenticated);
-  // }, [isLoggedIn, user, isAuthenticated]);
 
   return (
-    <AppContext.Provider
-      value={{
-        contextValue,
-      }}
-    >
-      {children}
-    </AppContext.Provider>
+    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   );
 };
 

@@ -1,10 +1,9 @@
 import { useContext } from "react";
-import AppContext from "../../context/AppContext.js";
+import { useAppContext } from "../context/AppContextProvider";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import bcryptjs from "bcryptjs";
 import { useSnackbar } from "notistack";
 import { motion } from "framer-motion";
 
@@ -15,7 +14,7 @@ const LogIn = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { setIsAuthenticated, setIsLoggedIn, setUser } = useContext(AppContext);
+  // const { setIsAuthenticated, setIsLoggedIn, setUser } = useContext(AppContext);
 
   const handleLogIn = (e) => {
     e.preventDefault();
@@ -31,9 +30,9 @@ const LogIn = () => {
 
       .then(async (res) => {
         if (res.data) {
-          setIsAuthenticated(true);
-          setIsLoggedIn(true);
-          setUser(email);
+          // setIsAuthenticated(true);
+          // setIsLoggedIn(true);
+          // setUser(email);
           navigate("/home");
         } else {
           enqueueSnackbar("Either Email or Password is Incorrect", {
