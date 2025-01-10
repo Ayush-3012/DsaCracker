@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
-import bcryptjs from "bcryptjs";
 import { useSnackbar } from "notistack";
 import { motion } from "framer-motion";
+import { useAppContext } from "../context/AppContextProvider";
 
 const SignUp = () => {
   const [viewPassword, setViewPassword] = useState(false);
@@ -14,14 +12,23 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordMatched, setPasswordMatched] = useState(false);
   const navigator = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-  const addUser = (user) => {
-    axios
-      .post(`${import.meta.env.VITE_API_ROUTES}/users/register`, user)
+  const { auth } = useAppContext();
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    const user = {
+      email,
+      name,
+      password,
+    };
+
+    await auth
+      ?.registerAuth(user)
       .then((res) => {
+        console.log(res);
         const { message } = res.data;
         enqueueSnackbar(message, { variant: "info" });
         navigator("/");
@@ -32,17 +39,6 @@ const SignUp = () => {
         });
         console.log(err);
       });
-  };
-
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    const user = {
-      user_id: uuidv4(),
-      email,
-      name,
-      password: await bcryptjs.hash(password, 10),
-    };
-    passwordMatched && addUser(user);
   };
 
   return (
@@ -105,13 +101,6 @@ const SignUp = () => {
               className="p-3 rounded-md w-80 font-mono focus:border focus:border-slate-600 outline-none max-md:w-72 max-sm:w-64"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              onBlur={() => {
-                password !== confirmPassword && confirmPassword !== ""
-                  ? enqueueSnackbar("Passwords do not match", {
-                      variant: "info",
-                    })
-                  : setPasswordMatched(true);
-              }}
             />
             {viewConfirmPassword ? (
               <FaEyeSlash

@@ -1,8 +1,17 @@
 /* eslint-disable react/prop-types */
 import { motion } from "framer-motion";
 import SheetCard from "../components/SheetCard";
+import { useEffect } from "react";
+import { useAppContext } from "../context/AppContextProvider";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const { auth } = useAppContext();
+
+  useEffect(() => {
+    !auth?.isLoggedIn && navigate("/");
+  }, [auth?.isLoggedIn]);
   return (
     <motion.div
       className="mx-4 my-1 max-md:mx-1 flex flex-col gap-1 h-full"

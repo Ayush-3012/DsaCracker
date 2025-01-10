@@ -71,7 +71,7 @@ export const getUserDetails = async (req, res) => {
 
 export const registerUser = async (req, res) => {
   try {
-    const { email, name, password } = req.body;
+    const { email, name, password } = req.body.user;
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -95,7 +95,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
-export const logoutUser = async (req, res) => {
+export const logoutUser = (req, res) => {
   try {
     res.clearCookie(process.env.COOKIE_NAME, {
       httpOnly: true,

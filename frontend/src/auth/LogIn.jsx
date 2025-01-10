@@ -14,25 +14,14 @@ const LogIn = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-  // const { setIsAuthenticated, setIsLoggedIn, setUser } = useContext(AppContext);
+  const { auth } = useAppContext();
 
-  const handleLogIn = (e) => {
+  const handleLogIn = async (e) => {
     e.preventDefault();
-    axios
-      .post(
-        `${import.meta.env.VITE_API_ROUTES}/v1/users/login`,
-        {
-          email,
-          password,
-        },
-        { withCredentials: true }
-      )
-
-      .then(async (res) => {
+    await auth
+      ?.loginAuth(email, password)
+      .then((res) => {
         if (res.data) {
-          // setIsAuthenticated(true);
-          // setIsLoggedIn(true);
-          // setUser(email);
           navigate("/home");
         } else {
           enqueueSnackbar("Either Email or Password is Incorrect", {

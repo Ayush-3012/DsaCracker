@@ -9,14 +9,12 @@ import { useNavigate } from "react-router-dom";
 const Index = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
-  // const { isLoggedIn } = useContext(AppContext);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { auth } = useAppContext();
 
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     navigate("/home");
-  //   }
-  // }, [isLoggedIn, navigate]);
+  useEffect(() => {
+    auth?.isLoggedIn && navigate("/home");
+  }, [auth?.isLoggedIn]);
 
   const handleSignUpClick = () => {
     setShowSignUp(true);

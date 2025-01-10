@@ -1,17 +1,15 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext } from "react";
-import { useTopics } from "../hooks/useTopics";
-import { useQuestions } from "../hooks/useQuestions";
+import { useSheet } from "../hooks/useSheet";
 import { useAuth } from "../hooks/useAuth";
 
 const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const auth = useAuth();
-  const topics = useTopics();
-  const questions = useQuestions();
+  const sheet = useSheet();
 
-  const contextValue = { auth, topics, questions };
+  const contextValue = { auth, sheet };
 
   return (
     <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
