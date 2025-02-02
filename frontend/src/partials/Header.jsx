@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { PiHouseBold, PiInfoBold, PiMapPinBold } from "react-icons/pi";
 import { FaRegUser } from "react-icons/fa";
-// import AppContext from "../context/AppContextProvider";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { useAppContext } from "../context/AppContextProvider";
 

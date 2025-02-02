@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { SiCodingninjas, SiGeeksforgeeks, SiLeetcode } from "react-icons/si";
-import axios from "axios";
-import { useContext, useState } from "react";
-import { useSnackbar } from "notistack";
-import AppContext from "../../app-context/AppContext";
+// import { useSnackbar } from "notistack";
+import { useState } from "react";
+import { useAppContext } from "../context/AppContextProvider";
 
 const QuestionItems = ({ item }) => {
-  const { enqueueSnackbar } = useSnackbar();
+  // const { enqueueSnackbar } = useSnackbar();
+  const { auth, question } = useAppContext();
+  const { dsName, sheetName } = useParams();
+
   const MotionLink = motion(Link);
   const cardVariants = {
     offscreen: {
@@ -25,40 +27,17 @@ const QuestionItems = ({ item }) => {
   };
 
   const [checked, setChecked] = useState(item.Done);
-  const {user} = useContext(AppContext)
 
-  const handleClick = () => {
-    const completedQuestion = {
-      topic: item.Topic,
-      problem: item.Problem,
-      done: !checked,
-      url: item.URL,
-      url2: item.URL2,
+  const handleClick = async () => {
+    const questionItem = {
+      sheetId: item.sheetId,
+      sheetName,
+      topicId: item.topicId,
+      topicName: dsName,
+      questionId: item._id,
     };
 
-    axios
-      .post(
-        `${import.meta.env.VITE_API_ROUTES}/questions/addQuestions`,
-        completedQuestion
-      )
-      .then((res) => {
-        const { topicId, questionId } = res.data;
-        axios
-          .patch(`${import.meta.env.VITE_API_ROUTES}/users/updateSolved?user=${user}`, {
-            topicId,
-            questionId,
-          })
-          .then((res) => {
-            setChecked(!checked);
-            const { message } = res.data;
-            enqueueSnackbar(message, { variant: "success" });
-          })
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => {
-        enqueueSnackbar("Error", { variant: "error" });
-        console.log(err);
-      });
+    await question?.saveQuestion(questionItem);
   };
 
   return (
@@ -99,18 +78,21 @@ const QuestionItems = ({ item }) => {
               target="_blank"
               whileHover={{ scale: 1.2 }}
             >
-              {item.URL.includes("geeksforgeeks") ? (
-                <SiGeeksforgeeks className="text-3xl text-emerald-400 max-md:text-2xl" />
-              ) : (
-                <SiLeetcode className="text-3xl text-fuchsia-400 max-md:text-2xl" />
+              {item.URL.includes("geeksforgeeks") && (
+                <SiGeeksforgeeks className="text-4xl text-green-400 max-md:text-2xl" />
+              )}
+              {item.URL.includes("leetcode") && (
+                <SiLeetcode className="text-3xl text-yellow-400 max-md:text-2xl" />
               )}
             </MotionLink>
             <MotionLink
-              to={item.URL2}
+              to={item?.URL2}
               target="_blank"
               whileHover={{ scale: 1.2 }}
             >
-              <SiCodingninjas className="text-3xl text-yellow-400 max-md:text-2xl" />
+              {item?.URL2?.includes("codingninjas") && (
+                <SiCodingninjas className="text-3xl text-yellow-400 max-md:text-2xl" />
+              )}
             </MotionLink>
           </div>
         </motion.div>

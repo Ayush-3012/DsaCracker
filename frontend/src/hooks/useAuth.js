@@ -4,6 +4,7 @@ import {
   loginUser,
   logoutUser,
   registerUser,
+  getUserDetails,
 } from "../services/authServices";
 
 export const useAuth = () => {
@@ -37,6 +38,11 @@ export const useAuth = () => {
     return data;
   };
 
+  const getDetails = async () => {
+    const data = await getUserDetails();
+    return data;
+  };
+
   const logoutAuth = async () => {
     const data = await logoutUser();
     if (data.status === 200) {
@@ -51,6 +57,7 @@ export const useAuth = () => {
     user,
     isLoggedIn,
     loginAuth,
+    getDetails,
     logoutAuth,
     registerAuth,
   };

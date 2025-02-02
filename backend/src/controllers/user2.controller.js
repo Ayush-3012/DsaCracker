@@ -35,6 +35,7 @@ export const loginUser = async (req, res) => {
       path: "/",
       domain: "localhost",
       signed: true,
+      maxAge: 24 * 60 * 60 * 1000,
 
       // ----------------------- PRODUCTION ----------------------
       //   httpOnly: true,
@@ -54,13 +55,10 @@ export const loginUser = async (req, res) => {
 
 export const getUserDetails = async (req, res) => {
   try {
-    User.findById(req.user.userId)
-      .then((foundUser) => {
-        return res.status(201).json({ message: "Found User is : ", foundUser });
-      })
-      .catch((err) => {
-        return res.status(404).json({ message: "User Not found", Error: err });
-      });
+    const foundUser = await User.findById(req.user.userId);
+    if (foundUser)
+      return res.status(201).json({ message: "Found User is : ", foundUser });
+    else return res.status(404).json({ message: "User Not found", Error: err });
   } catch (err) {
     console.log(err);
     return res

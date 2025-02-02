@@ -22,16 +22,8 @@ const userSchema = new mongoose.Schema(
     },
     completedQuestions: [
       {
-        topicId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Topic",
-        },
-        questionIds: [
-          {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Question",
-          },
-        ],
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Question",
         _id: false,
       },
     ],

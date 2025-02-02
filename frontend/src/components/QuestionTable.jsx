@@ -1,14 +1,13 @@
 /* eslint-disable react/prop-types */
-import { useContext } from "react";
 import QuestionItems from "./QuestionItems";
-import QuestionContext from "../../question-context/QuestionContext";
+import { useAppContext } from "../context/AppContextProvider";
 
 const QuestionTable = () => {
-  const { questions } = useContext(QuestionContext);
+  const { sheet } = useAppContext();
 
   return (
     <>
-      {questions?.map((item, index) => (
+      {sheet?.questions?.data?.map((item, index) => (
         <QuestionItems key={index} item={item} />
       ))}
     </>

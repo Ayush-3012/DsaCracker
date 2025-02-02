@@ -2,10 +2,10 @@
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
-const DsSingleCard = ({ item }) => {
-  console.log(item?.topicName);
-  const dsName = _.lowerCase(item?.topicName);
+const DsSingleCard = ({ item, sheetName }) => {
+  const dsName = _.lowerCase(item?.name);
   const percentQuesDone = (item?.doneQuestions * 100) / item?.questions?.length;
 
   return (
@@ -14,12 +14,12 @@ const DsSingleCard = ({ item }) => {
       animate={{ y: 0 }}
       transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
     >
-      <Link to={`/ds/${dsName}`}>
+      <Link to={`/sheet/${sheetName}/topics/${dsName}`}>
         <div className="relative bg-zinc-600 group text-slate-50 font-serif rounded-ee-xl rounded-ss-xl hover:shadow-[1px_1px_20px_rgb(0,255,245)] hover:-translate-y-2 transition ease-in-out duration-300">
           <div className="p-4">
             <img
-              src={`/static/images/${_.lowerCase(item?.topicName)}.png`}
-              alt={`${item?.topicName}`}
+              src={`/static/images/${_.lowerCase(item?.name)}.png`}
+              alt={`${item?.name}`}
               className="rounded-ss-xl grayscale group-hover:shadow-[1px_1px_10px_rgb(256,256,256)] group-hover:scale-105 group-hover:grayscale-0 duration-300 transition ease-in-out"
             />
           </div>
@@ -36,7 +36,7 @@ const DsSingleCard = ({ item }) => {
           </div>
           <div className="text-lg text-center">
             <h3 className="uppercase text-cyan-200 group-hover:text-teal-400 group-hover:-translate-x-2 transition ease-in-out duration-200 font-bold">
-              {item?.topicName}
+              {item?.name}
             </h3>
             <div className="font-mono flex flex-col items-start group-hover:text-emerald-300">
               <p className="px-2 ">

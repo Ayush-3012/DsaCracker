@@ -12,6 +12,7 @@ const Home = () => {
   useEffect(() => {
     !auth?.isLoggedIn && navigate("/");
   }, [auth?.isLoggedIn]);
+  
   return (
     <motion.div
       className="mx-4 my-1 max-md:mx-1 flex flex-col gap-1 h-full"

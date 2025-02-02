@@ -1,24 +1,25 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useContext, useEffect } from "react";
-import AppContext from "../app-context/AppContext";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import { useAppContext } from "../context/AppContextProvider";
 
 const About = () => {
   const MotionLink = motion(Link);
-  const { isLoggedIn } = useContext(AppContext);
+  // const { isLoggedIn } = useContext(AppContext);
+  const { auth } = useAppContext();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!auth?.isLoggedIn) {
       enqueueSnackbar("User is Not LoggedIn, Please LogIn", {
         variant: "info",
       }),
         navigate("/");
     }
-  }, [enqueueSnackbar, isLoggedIn, navigate]);
+  }, [enqueueSnackbar, auth?.isLoggedIn, navigate]);
 
   return (
     <motion.div

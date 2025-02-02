@@ -26,6 +26,18 @@ export const loginUser = async (email, password) => {
   }
 };
 
+export const getUserDetails = async () => {
+  try {
+    const res = await axios.get(
+      `${import.meta.env.VITE_API_ROUTES}/v1/users/profile`,
+      { withCredentials: true }
+    );
+    return res;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const checkAuthStatus = async () => {
   try {
     const res = await axios.get(
